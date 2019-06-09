@@ -36,10 +36,10 @@ public class Movie extends DateAudit {
     @Max(500)
     private Integer runtime;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Genre genre;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Language language;
 
 //    @Max(10000)

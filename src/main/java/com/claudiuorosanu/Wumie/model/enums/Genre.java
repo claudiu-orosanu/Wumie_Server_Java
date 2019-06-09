@@ -1,5 +1,7 @@
 package com.claudiuorosanu.Wumie.model.enums;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum Genre
 {
     Action,
@@ -10,5 +12,10 @@ public enum Genre
     ScienceFiction,
     Historical,
     Musical,
-    Western
+    Western;
+
+    @JsonValue
+    public int toValue() {
+        return ordinal();
+    }
 }
