@@ -5,6 +5,7 @@ import com.claudiuorosanu.Wumie.model.enums.Genre;
 import com.claudiuorosanu.Wumie.model.enums.Language;
 import com.claudiuorosanu.Wumie.model.enums.RoleName;
 import com.claudiuorosanu.Wumie.repository.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Component
+@Slf4j
 public class DatabaseSeeder implements ApplicationListener<ApplicationReadyEvent> {
 
     private final UserRepository userRepository;
@@ -56,6 +58,7 @@ public class DatabaseSeeder implements ApplicationListener<ApplicationReadyEvent
     private void seedUsersTable() {
         if (userRepository.existsByUsername("admin")) {
             // data already exists, exit
+            log.info("No need to seed users and roles table. Data already there");
             return;
         }
 
@@ -87,6 +90,7 @@ public class DatabaseSeeder implements ApplicationListener<ApplicationReadyEvent
     private void seedMoviesTable() {
 
         if (movieRepository.count() > 0) {
+            log.info("No need to seed movies table. Data already there");
             return;
         }
 
@@ -142,6 +146,7 @@ public class DatabaseSeeder implements ApplicationListener<ApplicationReadyEvent
 
     private void seedActorsTable() {
         if (actorRepository.count() > 0) {
+            log.info("No need to seed actors table. Data already there");
             return;
         }
 
@@ -177,6 +182,7 @@ public class DatabaseSeeder implements ApplicationListener<ApplicationReadyEvent
 
     private void seedActorMovieTable() {
         if (actorMovieRepository.count() > 0) {
+            log.info("No need to seed actor_movie table. Data already there");
             return;
         }
 
