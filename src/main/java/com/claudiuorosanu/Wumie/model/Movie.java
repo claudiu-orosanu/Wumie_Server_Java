@@ -67,7 +67,7 @@ public class Movie extends DateAudit {
 
     // relationships
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    private Set<ActorMovie> actorMovie = new HashSet<>();
+    private Set<ActorMovie> actorMovies = new HashSet<>();
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private Set<AwardMovie> awardMovies = new HashSet<>();
