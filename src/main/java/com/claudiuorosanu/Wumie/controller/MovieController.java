@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -87,6 +88,7 @@ public class MovieController {
     }
 
     // PUT /api/movies/5
+    @PreAuthorize("hasRole('Admin')")
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateMovie(@PathVariable Long id, @Valid @RequestBody Movie movie) {
         movie.setId(id);
@@ -96,6 +98,7 @@ public class MovieController {
 
     // POST /api/movies
     @PostMapping
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<?> createMovie(@Valid @RequestBody MovieDto movieDto) {
         Movie createdMovie = movieService.createMovie(movieDto);
         MovieDto createdMovieDto = movieToDtoConverter.convert(createdMovie);
@@ -111,6 +114,7 @@ public class MovieController {
     }
 
     // POST api/movies/5/actors
+    @PreAuthorize("hasRole('Admin')")
     @RequestMapping(value = "{id}/actors", method = RequestMethod.POST)
     public ResponseEntity addActorsToMovie(
             @PathVariable Long id,
@@ -131,6 +135,7 @@ public class MovieController {
     }
 
     // DELETE /api/movies/5
+    @PreAuthorize("hasRole('Admin')")
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public ResponseEntity deleteMovie(@PathVariable Long id) {
         try {
