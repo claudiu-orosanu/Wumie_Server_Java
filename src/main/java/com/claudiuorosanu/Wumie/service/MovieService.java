@@ -1,6 +1,7 @@
 package com.claudiuorosanu.Wumie.service;
 
 import com.claudiuorosanu.Wumie.dto.MovieDto;
+import com.claudiuorosanu.Wumie.model.Actor;
 import com.claudiuorosanu.Wumie.model.Movie;
 import com.claudiuorosanu.Wumie.model.User;
 
@@ -11,10 +12,12 @@ public interface MovieService {
     Movie getMovieById(Long id);
     void updateMovie(Movie movie);
     Movie createMovie(MovieDto movie);
-    Movie addActorsToMovie(Movie movie, List<Long> actorIds);
+    int addActorsToMovie(Movie movie, List<Long> actorIds);
     void deleteMovieById(Long id);
 
     void addMovieToWatchlist(Movie movie, User user);
 
     void removeMovieFromWatchlist(Movie movie, User user);
+
+    List<Movie> getMoviesForActor(Actor actor);
 }

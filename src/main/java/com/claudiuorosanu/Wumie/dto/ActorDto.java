@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -14,7 +13,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ActorDto {
 
-    @NotNull
     private Long id;
 
     @NotBlank
@@ -26,6 +24,7 @@ public class ActorDto {
     private String lastName;
 
     private LocalDate birthDate;
+    private int moviesCount;
 
     public ActorDto(
             Long id,

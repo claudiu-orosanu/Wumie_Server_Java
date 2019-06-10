@@ -2,7 +2,6 @@ package com.claudiuorosanu.Wumie.service;
 
 import com.claudiuorosanu.Wumie.converters.DtoToMovieConverter;
 import com.claudiuorosanu.Wumie.dto.MovieDto;
-import com.claudiuorosanu.Wumie.exception.AppException;
 import com.claudiuorosanu.Wumie.exception.ResourceNotFoundException;
 import com.claudiuorosanu.Wumie.model.Actor;
 import com.claudiuorosanu.Wumie.model.ActorMovie;
@@ -16,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -62,8 +63,9 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie addActorsToMovie(Movie movie, List<Long> actorIds) {
+    public int addActorsToMovie(Movie movie, List<Long> actorIds) {
         List<Actor> actorList = actorRepository.findAllById(actorIds);
+        int count = 0;
         for (Actor actor : actorList) {
 
             if (actorMovieRepository.existsByActor_IdAndMovie_Id(actor.getId(), movie.getId())) {
@@ -73,10 +75,11 @@ public class MovieServiceImpl implements MovieService {
             movie.getActorMovies().add(
                 new ActorMovie(movie, actor)
             );
+            count++;
         }
 
         movieRepository.save(movie);
-        return movie;
+        return count;
     }
 
     @Override
@@ -94,5 +97,15 @@ public class MovieServiceImpl implements MovieService {
     public void removeMovieFromWatchlist(Movie movie, User user) {
         user.getWatchlist().remove(movie);
         userRepository.save(user);
+    }
+
+    @Override
+    public List<Movie> getMoviesForActor(Actor actor) {
+
+        Set<ActorMovie> actorMovies = actor.getActorMovies();
+
+        return actorMovies.stream()
+                          .map(ActorMovie::getMovie)
+                          .collect(Collectors.toList());
     }
 }

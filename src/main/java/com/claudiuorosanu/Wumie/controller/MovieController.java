@@ -5,17 +5,18 @@ import com.claudiuorosanu.Wumie.converters.ActorToDtoConverter;
 import com.claudiuorosanu.Wumie.converters.MovieToDtoConverter;
 import com.claudiuorosanu.Wumie.dto.ActorDto;
 import com.claudiuorosanu.Wumie.dto.MovieDto;
+import com.claudiuorosanu.Wumie.exception.ResourceNotFoundException;
 import com.claudiuorosanu.Wumie.model.Actor;
 import com.claudiuorosanu.Wumie.model.Movie;
 import com.claudiuorosanu.Wumie.model.User;
 import com.claudiuorosanu.Wumie.payload.request.AddActorsToMovieRequest;
-import com.claudiuorosanu.Wumie.repository.UserRepository;
 import com.claudiuorosanu.Wumie.security.CurrentUser;
 import com.claudiuorosanu.Wumie.security.UserPrincipal;
 import com.claudiuorosanu.Wumie.service.ActorService;
 import com.claudiuorosanu.Wumie.service.MovieService;
 import com.claudiuorosanu.Wumie.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -111,16 +112,17 @@ public class MovieController {
 
     // POST api/movies/5/actors
     @RequestMapping(value = "{id}/actors", method = RequestMethod.POST)
-    public void addActorsToMovie(
+    public ResponseEntity addActorsToMovie(
             @PathVariable Long id,
             @RequestBody AddActorsToMovieRequest addActorsToMovieRequest
     ) {
         Movie movie = movieService.getMovieById(id);
-        movieService.addActorsToMovie(movie, addActorsToMovieRequest.getActorIds());
+        int noOfAddedActors = movieService.addActorsToMovie(movie, addActorsToMovieRequest.getActorIds());
+        return ResponseEntity.ok(noOfAddedActors);
     }
 
     // POST api/movies/5/watch
-    @RequestMapping(value = "{id}/watch")
+    @RequestMapping(value = "{id}/watch", method = RequestMethod.POST)
     public ResponseEntity addMovieToWatchlist(@PathVariable Long id, @CurrentUser UserPrincipal currentUser) {
         Movie movie = movieService.getMovieById(id);
         User user = userService.getUserById(currentUser.getId());
@@ -130,8 +132,13 @@ public class MovieController {
 
     // DELETE /api/movies/5
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public void deleteMovie(@PathVariable Long id) {
-        movieService.deleteMovieById(id);
+    public ResponseEntity deleteMovie(@PathVariable Long id) {
+        try {
+            movieService.deleteMovieById(id);
+            return ResponseEntity.ok("{}");
+        } catch (EmptyResultDataAccessException exception) {
+            throw new ResourceNotFoundException("movie", "id", id.toString());
+        }
     }
 
     // DELETE /api/movies/5
