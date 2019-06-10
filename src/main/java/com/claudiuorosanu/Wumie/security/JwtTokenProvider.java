@@ -34,7 +34,7 @@ public class JwtTokenProvider {
                 .claim("id", userPrincipal.getId())
                 .claim("fnm", userPrincipal.getFirstName())
                 .claim("lnm", userPrincipal.getLastName())
-                .claim("rol", role)
+                .claim("rol", role.equals("ROLE_ADMIN") ? "Admin" : "User")
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }

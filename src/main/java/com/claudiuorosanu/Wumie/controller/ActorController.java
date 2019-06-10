@@ -70,7 +70,7 @@ public class ActorController {
     }
 
     // PUT /api/actors/5
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateActor(@PathVariable Long id, @Valid @RequestBody Actor actor) {
         actor.setId(id);
@@ -79,7 +79,7 @@ public class ActorController {
     }
 
     // POST /api/actors
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<?> createActor(@Valid @RequestBody ActorDto actorDto) {
         Actor createdActor = actorService.createActor(actorDto);
@@ -96,7 +96,7 @@ public class ActorController {
     }
 
     // DELETE /api/actors/5
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void deleteActor(@PathVariable Long id) {
         actorService.deleteActorById(id);

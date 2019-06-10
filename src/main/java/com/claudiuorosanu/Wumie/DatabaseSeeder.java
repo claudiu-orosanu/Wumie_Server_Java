@@ -62,8 +62,8 @@ public class DatabaseSeeder implements ApplicationListener<ApplicationReadyEvent
             return;
         }
 
-        Role adminRole = new Role(RoleName.Admin);
-        Role userRole = new Role(RoleName.User);
+        Role adminRole = new Role(RoleName.ROLE_ADMIN);
+        Role userRole = new Role(RoleName.ROLE_USER);
         roleRepository.saveAll(Arrays.asList(adminRole, userRole));
 
         User adminUser = new User(
