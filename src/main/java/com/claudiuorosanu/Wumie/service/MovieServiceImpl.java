@@ -1,6 +1,6 @@
 package com.claudiuorosanu.Wumie.service;
 
-import com.claudiuorosanu.Wumie.converters.DtoToMovieConverter;
+import com.claudiuorosanu.Wumie.converter.DtoToMovieConverter;
 import com.claudiuorosanu.Wumie.dto.MovieDto;
 import com.claudiuorosanu.Wumie.exception.ResourceNotFoundException;
 import com.claudiuorosanu.Wumie.model.Actor;

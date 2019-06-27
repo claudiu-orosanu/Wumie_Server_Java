@@ -1,8 +1,8 @@
 package com.claudiuorosanu.Wumie.controller;
 
 
-import com.claudiuorosanu.Wumie.converters.ActorToDtoConverter;
-import com.claudiuorosanu.Wumie.converters.MovieToDtoConverter;
+import com.claudiuorosanu.Wumie.converter.ActorToDtoConverter;
+import com.claudiuorosanu.Wumie.converter.MovieToDtoConverter;
 import com.claudiuorosanu.Wumie.dto.ActorDto;
 import com.claudiuorosanu.Wumie.dto.MovieDto;
 import com.claudiuorosanu.Wumie.model.Actor;

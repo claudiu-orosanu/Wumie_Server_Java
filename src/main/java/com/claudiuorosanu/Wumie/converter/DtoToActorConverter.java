@@ -1,4 +1,4 @@
-package com.claudiuorosanu.Wumie.converters;
+package com.claudiuorosanu.Wumie.converter;
 
 import com.claudiuorosanu.Wumie.dto.ActorDto;
 import com.claudiuorosanu.Wumie.model.Actor;

@@ -40,7 +40,7 @@ public class LoggingAspect {
     }
 
     // Converters
-    @Before("execution(* com.claudiuorosanu.Wumie.converters.*.convert(..))")
+    @Before("execution(* com.claudiuorosanu.Wumie.converter.*.convert(..))")
     public void beforeConvertedMethodAdvice(JoinPoint joinPoint){
         log.info(
             "Converting...\n converter: {}... method: {}... args: {}",

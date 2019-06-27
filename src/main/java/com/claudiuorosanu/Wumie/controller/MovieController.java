@@ -1,8 +1,8 @@
 package com.claudiuorosanu.Wumie.controller;
 
 
-import com.claudiuorosanu.Wumie.converters.ActorToDtoConverter;
-import com.claudiuorosanu.Wumie.converters.MovieToDtoConverter;
+import com.claudiuorosanu.Wumie.converter.ActorToDtoConverter;
+import com.claudiuorosanu.Wumie.converter.MovieToDtoConverter;
 import com.claudiuorosanu.Wumie.dto.ActorDto;
 import com.claudiuorosanu.Wumie.dto.MovieDto;
 import com.claudiuorosanu.Wumie.exception.ResourceNotFoundException;
@@ -146,7 +146,7 @@ public class MovieController {
         }
     }
 
-    // DELETE /api/movies/5
+    // DELETE /api/movies/5/watch
     @RequestMapping(value = "{id}/watch", method = RequestMethod.DELETE)
     public ResponseEntity removeMovieFromWatchlist(
             @PathVariable Long id,

@@ -1,6 +1,5 @@
 package com.claudiuorosanu.Wumie.converter;
 
-import com.claudiuorosanu.Wumie.converters.ActorToDtoConverter;
 import com.claudiuorosanu.Wumie.dto.ActorDto;
 import com.claudiuorosanu.Wumie.model.Actor;
 import org.junit.Test;

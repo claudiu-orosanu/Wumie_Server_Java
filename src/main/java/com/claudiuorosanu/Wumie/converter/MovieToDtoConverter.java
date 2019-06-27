@@ -1,10 +1,8 @@
-package com.claudiuorosanu.Wumie.converters;
+package com.claudiuorosanu.Wumie.converter;
 
 import com.claudiuorosanu.Wumie.dto.MovieDto;
 import com.claudiuorosanu.Wumie.model.Movie;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
